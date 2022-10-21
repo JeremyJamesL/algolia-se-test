@@ -1,0 +1,99 @@
+.facets {
+    width: 20%;
+
+    @include respond(tab-land) {
+        position: relative;
+        height: initial;
+        width: 100%;
+        display: flex;
+        // justify-content: space-evenly;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+    }
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }   
+
+    &__heading {
+        display: inline;
+        margin-right: auto;
+    }
+
+
+    &__reset {
+        background-color: transparent;
+        border: none;
+        color: $color-highlight;
+        text-transform: uppercase;
+        cursor: pointer;
+        margin-left: 4px;
+
+        @include respond(phone) {
+            margin-left: 1rem;
+            font-size: 1.2rem;
+        }
+    }
+
+    &__type {
+        margin-bottom: 2rem
+    }
+
+    &__facet {
+        padding: 0px 10px;
+        border-radius: 5px;
+
+        &:hover {
+            background-color: $color-selected;
+            color: white;
+
+            span:last-child {
+                color: white;
+            }
+
+        }
+
+        &:active {
+            background-color: $color-selected;
+            color: white;
+
+            span:last-child {
+                color: white;
+            }
+
+        }
+
+        @include respond(phone) {
+            padding: 0px 2px;
+        }
+
+        &:has(input[type="checkbox"]:checked) {
+            background-color: $color-selected;
+            color: white;
+
+            span:last-child {
+                color: white;
+            }
+
+        }
+
+        input {
+            display: none;
+        }
+
+        label {
+            display: flex;
+            justify-content: space-between;
+            cursor: pointer;
+
+            span:last-child {
+                color: $font-light;
+                margin-left: 1rem;
+            }
+
+        }
+        
+    }
+}

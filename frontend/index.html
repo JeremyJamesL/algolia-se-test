@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant finder</title>
+    <script src="https://kit.fontawesome.com/ad81dc3500.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather&family=Work+Sans:wght@500&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/7e411db6fd.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+    <div class="header">
+        <div class="row">
+            <input type="text" autocomplete="off" id="search-box" class="search-box input" placeholder="Search restaurants by name, cuisine, location..."/>
+        </div>
+    </div>
+
+   
+    <div class="app row">
+ 
+            <nav class="facets">
+
+            </nav>
+
+            <section class="results-container">
+                <div class="results-container__header">
+                    <div class="metadata">  
+                    
+                    </div>
+                    
+                    <div class="sorting">
+                        <label for="sorting">Sort</label>
+                        <select name="" id="sorting" class="sorting">
+                            <option value="restaurants">Most relevant</option>
+                            <option value="restaurants_price_asc">Price low to high</option>
+                            <option value="restaurants_price_desc">Price high to low</option>
+                            <option value="restaurants_rating_asc">Rating low to high</option>
+                            <option value="restaurants_rating_desc">Rating high to low</option>
+                        </select>
+                    </div>
+
+
+                </div>
+
+                <ul class="results">
+
+                </ul>
+
+                <div class="pagination">
+                    <button class="pagination__nav pagination__nav--prev" name="prev">
+                        Prev
+                    </button>
+
+                    <div class="pagination__cur">
+                    </div>
+
+                    <button class="pagination__nav pagination__nav--next" name="next">
+                        Next
+                    </button>
+                </div>
+
+            </section>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/algoliasearch@3/dist/algoliasearchLite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/algoliasearch-helper@3.11.1/dist/algoliasearch.helper.min.js"></script>   
+    <script type="module" src="index.js"></script>
+</body>
+</html>
