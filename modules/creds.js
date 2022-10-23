@@ -1,0 +1,4 @@
+const API_ID = 'YSWWVAX5RB';
+const SEARCH_API_KEY = '9fb3db0222f7b5aef0e2b30791ee6201';
+
+export { API_ID, SEARCH_API_KEY};
