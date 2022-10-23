@@ -22,7 +22,6 @@ const dataController = (function() {
 
 
 // Interface controller
-
 const interfaceController = (function() {
 
     const DOMStrings = {
@@ -163,13 +162,15 @@ const interfaceController = (function() {
         
                 else {
                     facetValues.forEach(value => {
-                        html += `
-                        <li class="facets__facet">
-                            <input type="checkbox" ${value.isRefined ? 'checked' : ''} id="fl-${value.name}" name="${value.name}" />
-                            <label for="fl-${value.name}"><span>${value.name}</span> <span>${value.count}</span></label>
-                        </li>
-                        `;
+                     
+                            html += `
+                            <li class="facets__facet">
+                                <input type="checkbox" ${value.isRefined ? 'checked' : ''} id="fl-${value.name}" name="${value.name}" />
+                                <label for="fl-${value.name}"><span>${value.name}</span> <span>${value.count}</span></label>
+                            </li>
+                            `;
                         
+
                     })
         
                 }
