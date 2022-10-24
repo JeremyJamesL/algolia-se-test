@@ -15,7 +15,7 @@ George
 
 Hi George,
 
-Thank you for reaching out. I have given definition of each of the concepts below for you:
+Thank you for reaching out. I have given definitions of each of the concepts below for you:
 
 ### Records:
 
@@ -35,7 +35,7 @@ Records are made up of structured key-value pairs. For t-shirts, one records cou
 
 ### Indexing:
 
-Indexing refers to the process of adding, updating or deleting records from your Algolia index (you can think of your index as your Algolia database). 
+Indexing refers to the process of adding, updating or deleting records from your Algolia index. 
 
 For example, if you have added a new product to your catalogue and you want users to search for that product, you can add it to your Algolia index - this process is an indexing operation. Likewise, if you delete the same product from your index, this is also an indexing operation.
 
@@ -43,7 +43,7 @@ For example, if you have added a new product to your catalogue and you want user
 
 You can think of custom ranking metrics as business specific metrics that you want to be used to reorder results to better align with your business goals. 
 
-For example, if you are an ecommerce company that needs better visibility for on sale items and your records have an on sale flag, for example ```"onSale": true```, then adding ```onSale``` as a custom ranking attribute will mean that for records with textual relevance equality, those that are on sale will be more highly ranked than those that are not.
+For example, if you are an ecommerce company that needs better visibility for on sale items and your records have an on sale attribute, for example ```"onSale": true```, then adding ```onSale``` as a custom ranking attribute will mean that for records with textual relevance equality, those that are on sale will be more highly ranked than those that are not.
 
 
 ## Question 2:
@@ -61,7 +61,9 @@ Hi Matt,
 
 Sorry to hear that you aren't enjoying the new design. I will be sure to pass your feedback onto the product team.
 
-That being said, for every operation you are able to perform in the dashboard, we have an API method. For example, to delete an index we have the delete method: https://www.algolia.com/doc/api-reference/api-methods/delete-index/, likewise for clear indices: https://www.algolia.com/doc/api-reference/api-methods/delete-index/. You may find it more convenient to build these methods into your workflow while iterating.
+That being said, for every operation you are able to perform in the dashboard, we have an API method. For example, to delete an index we have the delete method: https://www.algolia.com/doc/api-reference/api-methods/delete-index/, likewise for clear indices: https://www.algolia.com/doc/api-reference/api-methods/delete-index/. 
+
+You may find it more convenient to build these methods into your workflow while iterating.
 
 ## Question 3:
 Hi,
