@@ -1,6 +1,6 @@
 // Global variables
 import {API_ID, SEARCH_API_KEY} from "./modules/creds.js";
-var client = algoliasearch("YSWWVAX5RB", "9fb3db0222f7b5aef0e2b30791ee6201");
+var client = algoliasearch(API_ID, SEARCH_API_KEY);
 var helper = algoliasearchHelper(client, 'restaurants', {hitsPerPage: 10, facets: ['food_type', 'rounded_rating', 'payment_options', 'price_range', 'dining_style' ], maxValuesPerFacet: 5});
 
 // Data controller
