@@ -239,6 +239,9 @@ ol, ul {
 .facets {
   width: 20%;
 }
+.facets > div {
+  margin-bottom: 2rem;
+}
 @media (max-width: 75em) {
   .facets {
     position: relative;
@@ -272,12 +275,12 @@ ol, ul {
     font-size: 1.2rem;
   }
 }
-.facets__type {
-  margin-bottom: 2rem;
-}
 .facets__facet {
   padding: 0px 10px;
   border-radius: 5px;
+}
+.facets__facet:nth-child(n+6):nth-child(n-0) {
+  display: none;
 }
 .facets__facet:hover {
   background-color: #3397c5;
@@ -316,6 +319,14 @@ ol, ul {
 .facets__facet label span:last-child {
   color: #c2c2c2;
   margin-left: 1rem;
+}
+.facets__expand {
+  color: #3397c5;
+  text-transform: uppercase;
+  font-family: "Work Sans", sans-serif;
+  cursor: pointer;
+  margin-left: 4px;
+  font-size: 1.2rem;
 }
 
 .pagination {

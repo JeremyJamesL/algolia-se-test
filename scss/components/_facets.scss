@@ -1,6 +1,10 @@
 .facets {
     width: 20%;
 
+    & > div {
+        margin-bottom: 2rem;
+    }
+
     @include respond(tab-land) {
         position: relative;
         height: initial;
@@ -38,12 +42,16 @@
     }
 
     &__type {
-        margin-bottom: 2rem
+        // margin-bottom: 2rem
     }
 
     &__facet {
         padding: 0px 10px;
         border-radius: 5px;
+
+        &:nth-child(n+6):nth-child(n-0) {
+            display: none;
+          }
 
         &:hover {
             background-color: $color-selected;
@@ -96,4 +104,14 @@
         }
         
     }
+
+    &__expand {
+        color: $color-selected;
+        text-transform: uppercase;
+        font-family: $heading-font;
+        cursor: pointer;
+        margin-left: 4px;
+        font-size: 1.2rem;
+    }
+
 }

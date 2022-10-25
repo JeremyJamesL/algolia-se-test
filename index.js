@@ -1,7 +1,7 @@
 // Global variables
 import {API_ID, SEARCH_API_KEY} from "./modules/creds.js";
 var client = algoliasearch(API_ID, SEARCH_API_KEY);
-var helper = algoliasearchHelper(client, 'restaurants', {hitsPerPage: 10, facets: ['food_type', 'rounded_rating', 'payment_options', 'price_range', 'dining_style' ], maxValuesPerFacet: 10});
+var helper = algoliasearchHelper(client, 'restaurants', {hitsPerPage: 10, facets: ['food_type', 'rounded_rating', 'payment_options', 'price_range', 'dining_style' ], maxValuesPerFacet: 100});
 
 // Data controller
 const dataController = (function() {
@@ -16,6 +16,7 @@ const dataController = (function() {
         currentPageNum: function() {
             return numPages;
         }
+
     }
     
 })();
@@ -32,7 +33,8 @@ const interfaceController = (function() {
         metaData: '.metadata',
         currentPage: '.pagination__cur',
         pagination: '.pagination',
-        sorting: '.sorting'
+        sorting: '.sorting',
+        allFacets: '.facets__facet'
     }
 
     return {
@@ -108,16 +110,18 @@ const interfaceController = (function() {
             });
         },
 
+
+
         renderFacetList: function(content) {
 
             // Get facetTypes
             const facetTypes = content.facets.map(facet => facet.name);
-
             let html = '';
 
             // Iterate and render each facetType
             facetTypes.forEach(type => {
                 const facetValues = content.getFacetValues(type);
+                const facetsLength = facetValues.length;
                 let typeTitle;
 
                 // Set facetType title
@@ -162,19 +166,18 @@ const interfaceController = (function() {
         
                 else {
                     facetValues.forEach(value => {
-                     
                             html += `
                             <li class="facets__facet">
                                 <input type="checkbox" ${value.isRefined ? 'checked' : ''} id="fl-${value.name}" name="${value.name}" />
                                 <label for="fl-${value.name}"><span>${value.name}</span> <span>${value.count}</span></label>
                             </li>
                             `;
-                        
-
                     })
         
                 }
+
                 html += `</ul>
+                ${facetsLength > 5 ? `<span class="facets__expand facets__expand--more">Show more</span>` : ``}
                 </div> `;
                 document.querySelector(DOMStrings.facetsArea).innerHTML = html;
             });
@@ -195,22 +198,57 @@ const interfaceController = (function() {
 
 
         updateFacets: function(e) { 
-
-            // Toggle facet
-            if(e.target.type === 'checkbox') {
-                const facetType = e.target.parentElement.parentElement.id;
-                const facetValue = e.target.name;
-                helper.toggleFacetRefinement(facetType, facetValue).search()
-            }
-
-            // Handle reset click
-            if(e.target.classList.contains('facets__reset')) {
-                const facetType = e.target.id;
-                const facetTypeNew = facetType.replace('reset--', '');
-                helper.clearRefinements(facetTypeNew).search();
-            }
+            const facetType = e.target.parentElement.parentElement.id;
+            const facetValue = e.target.name;
+            helper.toggleFacetRefinement(facetType, facetValue).search();
         },
 
+        handleFacetShowHide: function(event, type) {
+
+            // Set type
+            let showType = type === 'more' ? 'less' : type === 'less' ? 'more' : '';
+            
+            // Get facet items only of div with event target
+            const facetList = event.target.parentElement.children[1];
+            const facetItems = facetList.querySelectorAll('li');
+
+            // Either display or hide
+            facetItems.forEach(el => {
+                if(type === 'more') {
+                    el.style.display = "block";
+                } else {
+                    el.style.display = '';
+                    document.body.scrollTop = 0;
+                    document.documentElement.scrollTop = 0;
+                }
+                
+            });
+
+            // Create new 'show more' or 'show less' button
+            const newBtn = document.createElement('span');
+            newBtn.textContent = `Show ${showType}`;
+            newBtn.classList.add('facets__expand', `facets__expand--${showType}`);
+            event.target.parentElement.appendChild(newBtn);
+
+            // Remove old span
+            event.target.remove();
+
+        },
+
+        showAllFacets: function(e) {
+            interfaceController.handleFacetShowHide(e,'more');
+        },
+
+        showLessFacets: function(e)  {
+            interfaceController.handleFacetShowHide(e,'less');
+        },
+
+
+        resetFacets: function(e) {
+            const facetType = e.target.id;
+            const facetTypeNew = facetType.replace('reset--', '');
+            helper.clearRefinements(facetTypeNew).search();
+        },
 
         renderMetadata: function(content) {
             const results = content.nbHits;
@@ -266,7 +304,6 @@ const controller = (function(UICtrl, dataCtrl) {
     navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
 
 
-
     const setUpEventListeners = ()  => {
 
         const DOM = UICtrl.getDOMStrings();
@@ -305,7 +342,24 @@ const controller = (function(UICtrl, dataCtrl) {
     }
 
     const controlFacets = (e) => {
-        UICtrl.updateFacets(e);
+
+        if(e.target.type === 'checkbox') {
+            UICtrl.updateFacets(e);
+        }
+
+        if(e.target.classList.contains('facets__reset')) {
+            UICtrl.resetFacets(e);
+        }
+
+        if(e.target.classList.contains('facets__expand--more')) {
+            UICtrl.showAllFacets(e);
+        }
+
+        if(e.target.classList.contains('facets__expand--less')) {
+            UICtrl.showLessFacets(e);
+        }
+
+
     }
 
     const controlPagination = (e) => {
