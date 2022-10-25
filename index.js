@@ -177,7 +177,7 @@ const interfaceController = (function() {
                 }
 
                 html += `</ul>
-                ${facetsLength > 5 ? `<span class="facets__expand facets__expand--more">Show more</span>` : ``}
+                ${facetsLength > 5 ? `<span class="facets__expand facets__expand--all">Show all</span>` : ``}
                 </div> `;
                 document.querySelector(DOMStrings.facetsArea).innerHTML = html;
             });
@@ -206,7 +206,7 @@ const interfaceController = (function() {
         handleFacetShowHide: function(event, type) {
 
             // Set type
-            let showType = type === 'more' ? 'less' : type === 'less' ? 'more' : '';
+            let showType = type === 'more' ? 'less' : type === 'less' ? 'all' : '';
             
             // Get facet items only of div with event target
             const facetList = event.target.parentElement.children[1];
@@ -351,7 +351,7 @@ const controller = (function(UICtrl, dataCtrl) {
             UICtrl.resetFacets(e);
         }
 
-        if(e.target.classList.contains('facets__expand--more')) {
+        if(e.target.classList.contains('facets__expand--all')) {
             UICtrl.showAllFacets(e);
         }
 
