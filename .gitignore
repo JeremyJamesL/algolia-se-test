@@ -1,3 +1,3 @@
 node_modules/
-backend/modules/creds
+backend/modules/*
 .DS_Store
